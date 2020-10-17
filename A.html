@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style2.css" />
+</head>
+<body class="a">
+	<main>
+	<h1><img src="pen.jpeg" height="60" width="60" align="left">Linux Process or CPU Scheduling</h1>
+	<p>From versions 2.6 to 2.6.23, the kernel used an O (1) scheduler. The Completely Fair Scheduler is the name of a task scheduler which was merged into the 2.6.23 release of the Linux kernel. It handles CPU resource allocation for executing processes, and aims to maximize overall CPU utilization while maximizing interactive performance. It uses that uses red-black trees instead of queues.</p>
+	<p>Two classes of processes :</p>
+	<p>&#926 Real-time (soft deadlines)</p>
+	<p>&#926 Timesharing algorithm</p>
+	<p>Normal process scheduling uses a prioritized, preemptive, credit-based policy :</p>
+	<p>&#9758 Scheduler always chooses process with the most credits to run.</p>
+	<p>&#9758 On each timer interrupt one credit is deducted until zero is reached at which time the process is preempted.</p>
+	<p>&#9758 If no ready process then all credits for a process calculated as credits = credits/2 + priority.</p>
+	<p>&#9758 This approach favors I/O bound processes which do not use up their credits when they run.</p>
+	<p>The Round Robin and FIFO scheduling algorithms are used to switch between real-time processes</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">Linux is the most prominent free software operating system</h2>
+	<br>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp Process is called a Task</b></p>
+	<p>&#9823 Basic Address space, handle table, statistics</p>
+	<p>&#9823 Parent/child relationship</p>
+	<p>&#9823 Basic scheduling unit</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp Threads</b></p>
+	<p>&#9823 No threads per-second</p>
+	<p>&#9823 Tasks can act like Windows threads by sharing handle table, PID and address space</p>
+	<p>&#9823 P-Threads : cooperative user-mode threads</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp Windowing</b></p>
+	<p>&#9823 Linux has a user-mode X-Windowing system</p>
+	<p style="background-color:#808080";><b style="color:white;"></b></p>
+	<p>&#9823 Normal : priority 100-139</p>
+	<p>&#9823 Fixed Round Robin : priority 0-99</p>
+	<p>&#9823 Fixed FIFO : priority 0-99</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp Lower priorities are favored</b></p>
+	<p>&#9823 Priorities of normal threads go up (decay) as they use CPU</p>
+	<p>&#9823 Priorities of interactive threads go down (boost)</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp Most threads use a dynamic priority policy</b></p>
+	<p>&#9823 Normal class : Similar to the classic UNIX scheduler</p>
+	<p>&#9823 A newly created thread starts with a base priority</p>
+	<p>&#9823 Threads that block frequently (I/O bound) will have their priority gradually increased</p>
+	<p>&#9823 Threads that always exhaust their time slice (CPU bound) will have their priority gradually decreased</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp “Nice value” sets a thread’s base priority</b></p>
+	<p>&#9823 Larger values = less priority, lower values = higher priority</p>
+	<p>&#9823 Valid nice values are in the range of -20 to +20</p>
+	<p>&#9823 Non-privileged users can only specify positive nice value</p>
+	<p style="background-color:#808080";><b style="color:white;"> &nbsp&nbsp Real time scheduling in Linux</b></p>
+	<p>&#9823 Selected with the sched-setscheduler( ) system call</p>
+	<p>&#9823 Use static priority values in the range of 1 to 99</p>
+	<p>&#9823 Executed strictly in order of decreasing static priority</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp RT threads can easily starve lower-priority threads from executing</b></p>
+	<p>&#9823 Root privileges or the CAP-SYS-NICE capability are required for the selection of a real-time scheduling policy</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp Scheduling timeslices in Linux</b></p>
+	<p>&#9823 Default is 100ms</p>
+	<p>&#9823 Varies across entire range based on priority, which is based on interactivity level</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp The Linux 2.4 scheduler is O(n)</b></p>
+	<p>&#9823 If there are 10 active tasks, it scans 10 of them in a list in order to decide which should execute next</p>
+	<p>&#9823 This means long scans and long durations under the scheduler lock</p>
+</main>
+</body>
+</html>

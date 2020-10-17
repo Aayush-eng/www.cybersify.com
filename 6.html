@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style2.css" />
+</head>
+<body class="f">
+	<main>
+	<h1><img src="pen.jpeg" height="60" width="60" align="left">The Linux File System</h1>
+	<p>The Linux File System has a TREE like structure.</p>
+	<p>The Tree like structure is also referred to as The DIRECTORY TREE.</p>
+	<p>Window users usually use the Word Folder. However, in Linux Terminology, Folders are referred to as Directories. </p>
+	<p>So what Windows Users refer to as Folders, Linux Users refer to as Directory (THEY ARE THE SAME THING).</p>
+	<center><img src="F1.png" style="border:solid black 3px;"></center>
+	<h1><img src="pen.jpeg" height="60" width="60" align="left">The Directory Tree</h1>
+	<p>Pretty much like a Family Tree. In Linux File System, each directory (or File) has a parent. However, The onlymexception is the Root Directory. The Root Directory has no Parents and is represented by a Forward Slash (/).</p>
+	<p>The Root Directory is the First Directory (Top Most) in our Directory Tree. The Root Directory contains Files and Subdirectories, which contain more Files and Subdirectories and so on.</p>
+	<center><img src="L3.png" height="80%" width="80%" style="border:solid black 3px;"></center>
+	<h1><img src="pen.jpeg" height="60" width="60" align="left">Absolute vs Relative Paths</h1>
+	<p>An <b style="color:red;">Absolute Path</b> begins with the Root Directory and follows the Directory Tree branch by branch until the path to the desired Directory or file is completed.</p>
+	<h3>Key Points :</h3>
+	<p>&#10031 First forward slash (/) in the absolute path represents the directory root. Besides this, all slashes in the path represent the directory separator.</p>
+	<p>&#10031 Besides the last name, all names in the absolute path belong to directories. Last name can belong to file or directory.</p>
+	<p>&#10031 In the absolute path, directories names are written in their hierarchy order. Parent directory is name is written in the left side.</p>
+	<p>&#10031 Absolute path does not change when we change the current directory.</p>
+	<p>&#10031 To know to the absolute path of the current directory, we can use the command pwd.</p>
+	<b style="color:red;">EXAMPLE</b>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp /home/john/documents/phone.txt</b></p>
+	<center><img src="L5.png" height="80%" width="80%" style="border:solid black 3px;"></center>
+	<br>
+	
+	<p>On the other hand, a <b style="color:red;">Relative Path</b> starts from the current working directory. </p>
+	<h3>Key Points :</h3>
+	<p>&#10031 In Linux every directory contains two dots; single dot and double dots.</p>
+	<p>&#10031 When a directory is created, both the single dot and the double dots are also automatically created in it. By default these dots are hidden and do not show in the output of the command ls. To view these dots, we have to use the option a with the command ls.</p>
+	<p>&#10031 The single dot refers to the directory itself and the double dots refers to its parent directory or the directory that contains it. </p>
+	<p>&#10031 Shell allows us to access the current directory and the parent directory by using the single dot and the double dots respectively.</p>
+    <p>&#10031 Relative path also uses these dots to represent the current directory and the parent directory respectively. With the use of these dots, we can build the relative path of any file or directory from the current directory.</p>
+	<b style="color:red;">EXAMPLE</b>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp If our working directory is John the we access the file phone.txt by the relative path ./documents/phone.txt</b></p>
+</main>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style2.css" />
+</head>
+<body class="d">
+	<main>
+	<h1><img src="pen.jpeg" height="60" width="60" align="left">Deadlock Management</h1>
+	<p>This can be simply defined as a situation where there are two or more (a set of) processes or threads are mutually blocking each other. Consider an example consist of two threads. Thread 1 is waiting for thread 2 to release its lock to perform an action. This event will be clear by looking at the following diagram.</p>
+	<center><img src="d1.png" border="5px" height="30%" width="30%"></center>
+	<p>Neither thread will not be able to release any locks. So the execution of the action will be jammed in this circumstance. This state can consider as a deadlock kind of a situation.</p>
+	<p>&#9806 <b>Mutually blocking for an event can be :</b></p>
+	<p>&#10031 Blocking for access to a certain section.</p>
+	<p>&#10031 Blocking for a resource.</p>
+	<p>&#10031 If two programs are sharing the same resource at once, results both programs not function well.</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">Conditions for Deadlock</h2>
+	<p>&#9819 <b style="color:blue;">Mutual Exclusion :</b> Resources can not be shared in this phase.</p>
+	<p>&#9819 <b style="color:blue;">Acquired Piece Meal :</b> Not taking the resources at once that are needed to complete a certain task.</p>
+	<p>&#9819 <b style="color:blue;">No preemption :</b>Resources can not be taken away from process while it is functioning.</p>
+	<p>&#9819 <b style="color:blue;">Resources are not given up (Circular wait) :</b> A certain process does not give up its resources until it has satisfied all its outstanding requests for resources.</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">How to overcome from Deadlock situation ?</h2>
+	<p>&#10031 Ignore the problem altogether.</p>
+	<p>&#10031 Detection and recovery.</p>
+	<p>&#10031 Avoidance by careful resource allocation.</p>
+	<p>&#10031  Prevention by structurally negating one of the four necessary conditions.</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">Deadlock Prevention</h2>
+	<p>Utilizing the resources in such a way that will not lead to deadlock situation is described in this section. The following steps will lead to help from causing deadlocks.</p>
+	<p>&#9819 Eliminate mutual exclusion clause means all process can access to any resource & proves unfeasible for resources that cannot be spooled, and even with spooled resources deadlock could still occur.</p>
+	<p>&#9819 Requesting resources before starting a task. So there will be no waiting time for resources in between several processes. That will assist to get rid off from deadlock situation.</p>
+	<p>&#9819 Removing no preemption condition may be hard to ignore because each process should have at least few resources to perform a given task.</p>
+	<p>&#9819 Circular wait condition can be easily removed. So that a process may be allowed to possess only one resource at a time, or a ranking may be imposed such that no waiting cycles are possible. Hierarchical order can be used to determine the allocation of resources into process.</p>
+    <h2><img src="pen.jpeg" height="55" width="55" align="left">Deadlock Problems</h2>
+    <p><b style="color:#8080ff;">Scenario 1 :</b></p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp Self deadlock - "re-acquire lock"<br>&nbsp&nbsp Say there's a thread A, it acquires lock X1 and then before relenquishing the lock, it re-acquires it. This will lead to a deadlock.</b></p>
+	<center><img src="d2.png" border="5px"></center>
+	<p><b style="color:#8080ff;">Scenario 2 :</b></p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp ABBA deadlock <br>&nbsp&nbsp Say there're two threads thread A and thread B executing simultaneously and two locks  X1 and X2 (protecting some critical region). A acquires X1 &nbsp&nbsp and B acquires X2 and then A tries to acquire X2 and B tries to acquire X1. This will deadlock the both the threads.</b></p>
+	<center><img src="d3.png" border="5px" height="50%" width="50%"></center>
+    <h2><img src="pen.jpeg" height="55" width="55" align="left">How to avoid Deadlocks (Coding Guidelines) ?</h2>
+    <p>These guidelines are basically spawned from the kind of deadlocks that exist:</p>
+    <p>&#8224 Maintain lock order ie where ever multiple locks are being acquired, make sure they are all acquired in the same order otherwise it would lead to a ABBA deadlock situation above.</p>
+    <p>&#8224 Never re-acquire the same lock that you are holding, be aware the code that will be executed in the current thread, the functions that will be called, so if a lock has been acquired in some upstream function, don't reacquire it.</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">How to detect / solve deadlocks (Coding Guidelines) ?</h2>
+	<p>&#9752  Manually inspect the code to check against the coding guidelines above.</p>
+	<p>&#9752 Run strace -p <pid> and check if the process is stuck in wait.</p>
+	<p>&#9752 If you suspect your application is *stuck*, do a ps aux|grep <application name>. If the output is "D" (uninterruptible sleep), it *could* mean there's a deadlock in your code.</p>
+	<p>&#9752 Linux kernel has an inbuilt feature called lockdep. It can help in pin-pointing the line in code causing the deadlock. See this post (post incomplete, check my answer on stackoverflow instead) on how to detect deadlocks using lockdep.</p>
+	<p>&#9752  Helgrind</p>
+	<table bgcolor="pink" border="5px">
+	<tr>
+		<td>Deadlocks (if very few), don't always need taking care of since it'll require too much effort and won't affect the system performance much, one can just reboot and get going, as Tom West said, <b style="color:blue;">"Not everything worth doing is worth doing well"</b>
+        </td>
+    </tr>
+	</table>
+</main>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style2.css" />
+</head>
+<body class="b">
+	<main>
+	<h1><img src="pen.jpeg" height="60" width="60" align="left">Introduction of Process Synchronization in LINUX</h1>
+    <p>Process synchronization in Linux involves providing a time slice for each process so that they get the required time for execution.</p>
+    <p>The process can be created using the fork() command in Linux. The creating process is called the parent process and the created process is the child process. A child process can have only one parent but a parent process may have many children. Both the parent and child processes have the same memory image, open files and environment strings. However, they have distinct address spaces.</p>
+    <center><img src="b1.png" style="border:3px solid black;"></center>
+    <h2><img src="pen.jpeg" height="55" width="55" align="left">Orphan Processes</h2>
+    <p>There are some processes that are still running even though their parent process has terminated or finished. These are known as orphan processes.Processes can be orphaned intentionally or unintentionally. An intentionally orphaned process runs in the background without any manual support. This is usually done to start an indefinitely running service or to complete a long-running job without user attention.</p>
+    <p>An unintentionally orphaned process is created when its parent process crashes or terminates. Unintentional orphan processes can be avoided using the process group mechanism.</p>
+    <h2><img src="pen.jpeg" height="55" width="55" align="left">Daemon Processes</h2>
+    <p>Some processes run in the background and are not in the direct control of the user. These are known as daemon processes. These processes are usually started when the system is bootstrapped and they terminate when the system is shut down.</p>
+    <p>Usually the daemon processes have a parent process that is the init process. This is because the init process usually adopts the daemon process after the parent process forks the daemon process and terminates.</p>
+    <p>There are some processes that are still running even though their parent process has ter
+	<p>On the basis of synchronization, processes can also be categorized as one of the following two types :</p>
+	<p>&#9802 <b>Independent Process :</b></p>
+	<p>Execution of one process does not affects the execution of other processes.</p>
+	<p>&#9802 <b>Cooperative Process :</b></p>
+	<p>Execution of one process affects the execution of other processes.</p>
+	<p>Process synchronization problem arises in the case of Cooperative process also because resources are shared in Cooperative processes.</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">Race Condition</h2>
+	<p>When more than one processes are executing the same code or accessing the same memory or any shared variable in that condition there is a possibility that the output or the value of the shared variable is wrong so for that all the processes doing race to say that my output is correct this condition known as race condition.</p>
+	<p>Several processes access and process the manipulations over the same data concurrently, then the outcome depends on the particular order in which the access takes place.</p>
+    <h2><img src="pen.jpeg" height="55" width="55" align="left">Critical Section Problem</h2>
+	<p>Critical section is a code segment that can be accessed by only one process at a time. Critical section contains shared variables which need to be synchronized to maintain consistency of data variables.</p>
+	<p>In the entry section, the process requests for entry in the Critical Section.</p>
+	<p>Any solution to the critical section problem must satisfy three requirements :</p>
+	<p>&#9802 <b>Mutual Exclusion :</b></p>
+	<p>If a process is executing in its critical section, then no other process is allowed to execute in the critical section.</p>
+    <p>&#9802 <b>Progress : </b></p>
+    <p>If no process is executing in the critical section and other processes are waiting outside the critical section, then only those processes that are not executing in their remainder section can participate in deciding which will enter in the critical section next, and the selection can not be postponed indefinitely.</p>
+    <p>&#9802 <b>Bounded Waiting :</b></p>
+    <p>A bound must exist on the number of times that other processes are allowed to enter their critical sections after a process has made a request to enter its critical section and before that request is granted.</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">Petersons Solution</h2>
+	<p>Petersons Solution is a classical software based solution to the critical section problem.</p>
+	<p>In Petersons solution, we have two shared variables:</p>
+	<p>&#9824 <b>boolean flag[i] : </b>Initialized to FALSE, initially no one is interested in entering the critical section.</p>
+	<p>&#9824 <b>int turn : </b>The process whose turn is to enter the critical section.</p>
+	<p>Petersons Solution preserves all three conditions :</p>
+	<p>&#10028 Mutual Exclusion is assured as only one process can access the critical section at any time.</p>
+	<p>&#10028 Progress is also assured, as a process outside the critical section does not block other processes from entering the critical section.</p>
+	<p>&#10028 Bounded Waiting is preserved as every process gets a fair chance.</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">TestAndSet</h2>
+	<p>TestAndSet is a hardware solution to the synchronization problem. In TestAndSet, we have a shared lock variable which can take either of the two values, 0 or 1.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp 0 Unlock <br>&nbsp&nbsp 1 Lock</b></p>
+	<p>Before entering into the critical section, a process inquires about the lock. If it is locked, it keeps on waiting till it becomes free and if it is not locked, it takes the lock and executes the critical section.</p>
+    <p>In TestAndSet, Mutual exclusion and progress are preserved but bounded waiting cannot be preserved.</p>
+	<h2><img src="pen.jpeg" height="55" width="55" align="left">Semaphores</h2>
+	<p>A Semaphore is an integer variable, which can be accessed only through two operations wait() and signal().</p>
+	<P>There are two types of semaphores : Binary Semaphores and Counting Semaphores</P>
+	<p>&#9802 <b>Binary Semaphores :</b></p>
+    <p>They can only be either 0 or 1. They are also known as mutex locks, as the locks can provide mutual exclusion. All the processes can share the same mutex semaphore that is initialized to 1. Then, a process has to wait until the lock becomes 0. Then, the process can make the mutex semaphore 1 and start its critical section. When it completes its critical section, it can reset the value of mutex semaphore to 0 and some other process can enter its critical section.</p>
+	<p>&#9802 <b>Counting Semaphores :</b></p>
+	<p>They can have any value and are not restricted over a certain domain. They can be used to control access to a resource that has a limitation on the number of simultaneous accesses. The semaphore can be initialized to the number of instances of the resource. Whenever a process wants to use that resource, it checks if the number of remaining instances is more than zero, i.e., the process has an instance available. Then, the process can enter its critical section thereby decreasing the value of the counting semaphore by 1. After the process is over with the use of the instance of the resource, it can leave the critical section thereby adding 1 to the number of available instances of the resource.</p>
+    
+</main>
+</body>
+</html>

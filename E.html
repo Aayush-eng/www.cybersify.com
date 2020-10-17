@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style2.css" />
+	<style>
+		* {
+  box-sizing: border-box;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 20px;
+}
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+	</style>
+</head>
+<body class="b">
+	<main>
+	<h1><img src="pen.jpeg" height="60" width="60" align="left">Interrupts	in	Linux</h1>
+	<p style="background: #b3ffff">&nbsp&nbsp<b>Why Interrupts?</b></p>
+	<p>&#127760 Devices	require	a prompt response from the CPU when various events occur, even when the	CPU	is busy running	a program.</p>
+	<p>&#127760 Need a mechanism for a device to "gain CPUs attention"</p>
+	<div class="row">
+    <div class="column">
+    <img src="d6.png" style="width:100%; border:solid black 3px;">
+    </div>
+    <div class="column">
+    <img src="d7.png" style="width:100%; border:solid black 3px;">
+    </div>
+    </div>
+    <h1><img src="pen.jpeg" height="60" width="60" align="left">Interrupt Vector</h1>
+    <p>An interrupt vector is the memory location of an interrupt handler, which prioritizes interrupts and saves them in a queue if more than one interrupt is waiting to be handled.</p>
+    <p>An interrupt is a signal from a device attached to a computer, or from a program within the computer, that tells the OS (operating system) to stop and decide what to do next. When an interrupt is generated, the OS saves its execution state by means of a context switch, a procedure that a computer processor follows to change from one task to another while ensuring that the tasks do not conflict. Once the OS has saved the execution state, it starts to execute the interrupt handler at the interrupt vector.</p>
+    <h1><img src="pen.jpeg" height="60" width="60" align="left">Interrupt Vector Table</h1>
+    <p>A table of interrupt vectors (pointers to routines that handle interrupts). On PCs, the interrupt vector table consists of 256 4-byte pointers, and resides in the first 1 K of addressable memory. Each interrupt number is reserved for a specific purpose. For example, 16 of the vectors are reserved for the 16 IRQlines.An interrupt vector table is also called a <b>dispatch table.</b></p>
+    <center><img src="d8.png" style="border: 3px solid black" height="70%" width="70%"></center>
+</main>
+</body>
+</html>

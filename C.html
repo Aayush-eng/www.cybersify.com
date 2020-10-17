@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style2.css" />
+</head>
+<body class="c">
+	<main>
+	<h1><img src="pen.jpeg" height="60" width="60" align="left">IPC MECHANISMS ON LINUX </h1>
+	<p>Inter-Process-Communication (or IPC for short) are mechanisms provided by the kernel to allow processes to communicate with each other. On modern systems, IPCs form the web that bind together each process within a large scale software architecture.</p>
+	<p>The Linux kernel provides the following IPC mechanisms :</p>
+	<p>&#9810 Signals</p>                    
+    <p>&#9810 Anonymous Pipes</p>
+    <p>&#9810 Named Pipes or FIFOs</p>
+    <p>&#9810 SysV Message Queues</p>
+    <p>&#9810 POSIX Message Queues</p>
+    <p>&#9810 SysV Shared memory</p>
+    <p>&#9810 POSIX Shared memory</p>
+    <p>&#9810 SysV semaphores</p>
+    <p>&#9810 POSIX semaphores</p>
+    <p>&#9810 FUTEX locks</p>
+    <p>&#9810 File-backed and anonymous shared memory using mmap</p>
+    <p>&#9810 UNIX Domain Sockets</p>
+    <p>&#9810 Netlink Sockets</p>
+    <p>&#9810 Network Sockets</p>
+    <p>&#9810 Inotify mechanisms</p>
+    <p>&#9810 FUSE subsystem</p>
+    <p>&#9810 D-Bus subsystem</p>
+	<br>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp SIGNALS</b></p>
+	<p>Signals are the cheapest forms of IPC provided by Linux. Their primary use is to notify processes of change in states or events that occur within the kernel or other processes. We use signals in real world to convey messages with least overhead - think of hand and body gestures. For example, in a crowded gathering, we raise a hand to gain attention, wave hand at a friend to greet and so on.</p>
+    <p>On Linux, the kernel notifies a process when an event or state change occurs by interrupting the process's normal flow of execution and invoking one of the signal handler functinos registered by the process or by the invoking one of the default signal dispositions supplied by the kernel, for the said event.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp ANONYMOUS PIPES</b></p>
+	<p>Anonymous pipes (or simply pipes, for short) provide a mechanism for one process to stream data to another. A pipe has two ends associated with a pair of file descriptors - making it a one-to-one messaging or communication mechanism. One end of the pipe is the read-end which is associated with a file-descriptor that can only be read, and the other end is the write-end which is associated with a file descriptor that can only be written. This design means that pipes are essentially half-duplex.</p>
+    <p>Anonymous pipes can be setup and used only between processes that share parent-child relationship. Generally the parent process creates a pipe and then forks child processes. Each child process gets access to the pipe created by the parent process via the file descriptors that get duplicated into their address space. This allows the parent to communicate with its children, or the children to communicate with each other using the shared pipe.</p>
+    <p>Pipes are generally used to implement Producer-Consumer design amongst processes - where one or more processes would produce data and stream them on one end of the pipe, while other processes would consume the data stream from the other end of the pipe.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp NAMED PIPES OR FIFO</b></p>
+	<p>Named pipes (or FIFO) are variants of pipe that allow communication between processes that are not related to each other. The processes communicate using named pipes by opening a special file known as a FIFO file. One process opens the FIFO file from writing while the other process opens the same file for reading. Thus any data written by the former process gets streamed through a pipe to the latter process. The FIFO file on disk acts as the contract between the two processes that wish to communicate.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp MESSAGE QUEUES</b></p>
+	<p>Message Queues are synonymous to mailboxes. One process writes a message packet on the message queue and exits. Another process can access the message packet from the same message queue at a latter point in time. The advantage of message queues over pipes/FIFOs are that the sender (or writer) processes do not have to wait for the receiver (or reader) processes to connect. Think of communication using pipes as similar to two people communicating over phone, while message queues are similar to two people communicating using mail or other messaging services.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp SHARED MEMORY</b></p>
+	<p>As the name implies, this IPC mechanism allows one process to share a region of memory in its address space with another. This allows two or more processes to communicate data more efficiently amongst themselves with minimal kernel intervention.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp SEMAPHORES</b></p>
+	<p>Semaphores are locking and synchronization mechanism used most widely when processes share resources. Linux supports both SysV semaphores and POSIX semaphores. POSIX semaphores provide a more simpler and elegant implementation and thus is most widely used when compared to SysV semaphores on Linux.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp FUTEXES</b></p>
+	<p>Futexes are high-performance low-overhead locking mechanisms provided by the kernel. Direct use of futexes is highly discouraged in system programs. Futexes are used internally by POSIX threading API for condition variables and its mutex implementations.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp UNIX DOMAIN SOCKETS</b></p>
+	<p>UNIX Domain Sockets provide a mechanism for implementing applications that communicate using the Client-Server architecture. They support both stream and datagram oriented communication, are full-duplex and support a variety of options. They are very widely used for developing many large-scale frameworks.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp NETLINK SOCKETS</b></p>
+	<p>Netlink sockets are similar to UNIX Domain Sockets in its API semantics - but used mainly for two purposes:<br>1) For communication between a process in user-space to a thread in kernel-space .<br>2) For communication amongst processes in user-space using broadcast mode.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp NETWORK SOCKETS</b></p>
+	<p>Based on the same API semantics like UNIX Domain Sockets, Network Sockets API provide mechanisms for communication between processes that run on different hosts on a network. Linux has rich support for features and various protocol stacks for using network sockets API. For all kinds of network programming and distributed programming - network socket APIs form the core interface.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp INOTIFY MECHANISMS</b></p>
+	<p>The Inotify API on Linux provides a method for processes to know of any changes on a monitored file or a directory asynchronously. By adding a file to inotify watch-list, a process will be notified by the kernel on any changes to the file like open, read, write, changes to file stat, deleting a file and so on.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp FUSE SUBSYSTEM</b></p>
+	<p>FUSE provides a method to implement a fully functional filesystem in user-space. Various operations on the mounted FUSE filesystem would trigger functions registered by the user-space filesystem handler process. This technique can also be used as an IPC mechanism to implement Client-Server architecture without using socket API semantics.</p>
+	<p style="background-color:#808080";><b style="color:white;">&nbsp&nbsp D-BUS SUBSYSTEM</b></p>
+	<p>D-Bus is a high-level IPC mechanism built generally on top of socket API that provides a mechanism for multiple processes to communicate with each other using various messaging patterns. D-Bus is a standards specification for processes communicating with each other and very widely used today by GUI implementations on Linux.</p>
+</main>
+</body>
+</html>
